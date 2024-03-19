@@ -1,10 +1,6 @@
 <?php
 $targetDir = "uploads/";
-$originalFileName = $_FILES["fileToUpload"]["name"];
-$extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-$uniqueFileName = uniqid() . '_' . mt_rand(1000, 9999) . '.' . $extension; // Generating a unique file name
-
-$targetFile = $targetDir . $uniqueFileName;
+$targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -29,11 +25,35 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-        echo "The file ". htmlspecialchars($originalFileName). " has been uploaded with a unique name: " . $uniqueFileName;
-        $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] .":8088". dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+        echo "The file ". htmlspecialchars(basename($_FILES["fileToUpload"]["name"])). " has been uploaded.";
+
+        // Get the selected deletion time from the form
+        $deleteAfterSeconds = $_POST['deleteTime'];
+
+        // Calculate expiration time
+        $fileExpirationTime = time() + $deleteAfterSeconds;
+
+        // Save expiration time in a file
+        $expirationFile = $targetDir . basename($targetFile) . '.expiration';
+        file_put_contents($expirationFile, $fileExpirationTime);
+
+        $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] . ":8088" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . basename($_FILES["fileToUpload"]["name"]);
         echo "<br><br>Here is your file URL: <a href='$fileUrl'>$fileUrl</a>";
     } else {
         echo "Sorry, there was an error uploading your file.";
+    }
+}
+
+// Check for expiration and delete expired files
+$files = glob($targetDir . '*.expiration');
+$current_time = time();
+foreach ($files as $file) {
+    $expiration_time = (int)file_get_contents($file);
+    $file_to_delete = str_replace('.expiration', '', $file);
+    if ($current_time >= $expiration_time && file_exists($file_to_delete)) {
+        unlink($file_to_delete);
+        unlink($file);
+        echo "<br>Expired file deleted: $file_to_delete";
     }
 }
 ?>

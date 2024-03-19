@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>File Upload</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Upload</title>
+<link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
+
+<div class="container">
     <h2>Upload a File</h2>
     <form action="upload.php" method="post" enctype="multipart/form-data">
-        Select file to upload:
+        <label for="fileToUpload">Select file to upload:</label>
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload File" name="submit">
+        
+        <label for="deleteTime">Select deletion time:</label>
+        <select name="deleteTime" id="deleteTime">
+            <option value="60">1 Min</option>
+            <option value="3600">1 hour</option>
+            <option value="86400">1 day</option>
+            <option value="604800">1 week</option>
+            <option value="2592000">1 month</option>
+        </select>
+        
+        <button type="submit" name="submit">Upload File</button>
     </form>
+</div>
+
 </body>
 </html>
