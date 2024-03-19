@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload</title>
     <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BHP File Server</h1>
+        <h2>Upload a File</h2>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Select file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <label for="duration">Select duration:</label>
+            <select name="duration" id="duration">
+                <option value="1">1 minute</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">1 day</option>
+            </select>
+            <label for="fromEmail">Your Email:</label>
+            <input type="email" name="fromEmail" id="fromEmail" required> <!-- Added "From" email input field -->
+            <label for="toEmail">Recipient's Email:</label>
+            <input type="email" name="toEmail" id="toEmail" required> <!-- Added "To" email input field -->
+            <input type="submit" value="Upload File" name="submit">
+            
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -24,6 +59,14 @@
             margin-top: 0;
             color: #333;
         }
+
+        h1 {
+    margin-top: 0; /* Remove default top margin */
+    text-align: center; /* Align center */
+    text-decoration: underline; /* Add underline */
+}
+
+
         form {
             margin-top: 20px;
         }
@@ -52,15 +95,5 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>BHP File Server</h1>
-        <h2>Upload a File</h2>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            <label for="fileToUpload">Select file to upload:</label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload File" name="submit">
-        </form>
-    </div>
-</body>
+
 </html>
