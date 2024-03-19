@@ -27,7 +27,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
         echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-        $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] .":8088". dirname($_SERVER['PHP_SELF']) . "/$targetDir" . basename($_FILES["fileToUpload"]["name"]);
+        $fileUrl = "http://" . $_SERVER['REMOTE_ADDR'] .":8088". dirname($_SERVER['PHP_SELF']) . "/$targetDir" . basename($_FILES["fileToUpload"]["name"]);
         echo "<br><br>Here is your file URL: <a href='$fileUrl'>$fileUrl</a>";
     } else {
         echo "Sorry, there was an error uploading your file.";
