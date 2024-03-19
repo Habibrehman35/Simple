@@ -39,8 +39,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             // File upload success
             $successMessage = "The file <strong>" . htmlspecialchars($originalFileName). "</strong> has been uploaded with a unique name: <strong>" . $uniqueFileName . "</strong>";
 
+             // Get the selected deletion time from the form
+        $deleteAfterSeconds = $_POST['deleteTime'];
+
+        // Calculate expiration time
+        $fileExpirationTime = time() + $deleteAfterSeconds;
+
+         // Get the selected deletion time in seconds
+         $deleteTime = $_POST['deleteTime'];
+        
+         // Calculate the deletion timestamp
+         $deleteTimestamp = time() + $deleteTime;
+
+        // Save expiration time in a file
+        $expirationFile = $targetDir . $uniqueFileName . '.expiration';
+        file_put_contents($expirationFile, $deleteTimestamp);
             // File URL
-            $fileUrl = "http://" . $_SERVER['HTTP_HOST'] . ":80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+            $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] . ":80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+
 
             // Send email notification
             $subject = "File Share Notification";
@@ -56,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
             // Display success message
             echo "<p class='success'>$successMessage</p>";
-            echo "<div class='file-url-container'>";
+            echo "<div class='container'>";
             echo "<p>Here is your file URL: <a href='$fileUrl'>$fileUrl</a></p>";
             echo "<button onclick='copyFileUrl()' class='copy-button'>Copy URL</button>";
             echo "</div>";
