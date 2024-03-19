@@ -15,16 +15,17 @@
         <form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">Select file to upload:</label>
             <input type="file" name="fileToUpload" id="fileToUpload">
-            <label for="duration">Select duration:</label>
-            <select name="duration" id="duration">
-                <option value="1">1 minute</option>
-                <option value="30">30 minutes</option>
-                <option value="60">1 hour</option>
-                <option value="120">2 hours</option>
-                <option value="180">3 hours</option>
-                <option value="360">6 hours</option>
-                <option value="720">12 hours</option>
-                <option value="1440">1 day</option>
+            
+            <label for="deleteTime">Select deletion time:</label>
+            <select name="deleteTime" id="deleteTime">
+                <option value="60">1 Min</option>
+                <option value="3600">1 hour</option>
+                <option value="86400">1 day</option>
+                <option value="604800">1 week</option>
+                <option value="2592000">1 month</option>
+            </select>
+            
+            <button type="submit" name="submit">Upload File</button>
             </select>
             <label for="fromEmail">Sender Email:</label>
             <input type="email" name="fromEmail" id="fromEmail" required> <!-- Added "From" email input field -->
