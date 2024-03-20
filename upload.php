@@ -1,4 +1,25 @@
 <?php
+// Include your database connection configuration or establish connection here
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "file_uploads";
+
+// Create connection
+$connection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+
+
+// Close the database connection
+$connection->close();
+?>
+
+<?php
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     // Set your email address as the "From" address
@@ -81,10 +102,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             echo "<p class='error'>Sorry, there was an error uploading your file.</p>";
         }
     }
-} else {
-    // Redirect if accessed directly
-    header("Location: index.php");
-    exit;
+} 
+
+// Check for expiration and delete expired files
+$files = glob($targetDir . '*.expiration');
+$current_time = time();
+foreach ($files as $expirationFile) {
+    $expiration_time = (int)file_get_contents($expirationFile);
+    $file_to_delete = str_replace('.expiration', '', $expirationFile);
+    if ($current_time >= $expiration_time && file_exists($file_to_delete)) {
+        unlink($file_to_delete);
+        unlink($expirationFile);
+    }
 }
 ?>
 

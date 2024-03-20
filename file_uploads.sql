@@ -1,4 +1,4 @@
-CREATE TABLE files (
+CREATE TABLE files2 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     filename VARCHAR(255) NOT NULL,
     unique_filename VARCHAR(255) NOT NULL,
