@@ -1,32 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('ok.gif'); /* Background image of rose */
+            background-size: 800px 600px; /* Specify the width and height of the background image */
+            background-repeat: no-repeat;
+            background-position:right;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            margin-top: -63px;
+           /* animation: animateBackground 20s linear infinite; */
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>File Upload</title>
-<link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+        .container {
+            max-width: 420px;
+            margin: 80px;
+            background-color: #ffffff; /* Transparent white background */
+            opacity: 90%;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in; /* Fade in animation */
+        }
+
+        @keyframes animateBackground {
+            0% {
+                background-position: 0 0; /* Initial position */
+            }
+            100% {
+                background-position: 100% 0; /* Move background image to the right */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1, h2  {
+            margin-top: 0;
+            text-align: center;
+            color: #0e6ee4; /* Red color */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        h3 {
+           
+            margin-top: 0;
+            text-align: center;
+            color: #bd0a25; 
+            font-size: 15px;  
+           }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #400d0d;
+            font-weight: bold;
+        }
+
+        input[type="file"], input[type="email"], select {
+            margin-bottom: 20px;
+            padding: 8px;
+            border: 2px solid #054713; /* Red border */
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        input[type="file"]:focus, input[type="email"]:focus, select:focus {
+            outline: none;
+            border-color: #ff6666; /* Lighter red on focus */
+        }
+
+        input[type="submit"] {
+            background-color: #ff3333; /* Red background color */
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff6666; /* Lighter red on hover */
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-    <h2>Upload a File</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <label for="fileToUpload">Select file to upload:</label>
-        <input type="file" name="fileToUpload" id="fileToUpload">
+    <div class="container">
+        <h3>انسان کے لئے وہی کچھ ہے جس کے لئے وہ کوشش کرے۔ (القرآن)</h3>
+        <h1>BHP FILE SHARE</h1>
         
-        <label for="deleteTime">Select deletion time:</label>
-        <select name="deleteTime" id="deleteTime">
-            <option value="60">1 Min</option>
-            <option value="3600">1 hour</option>
-            <option value="86400">1 day</option>
-            <option value="604800">1 week</option>
-            <option value="2592000">1 month</option>
-        </select>
-        
-        <button type="submit" name="submit">Upload File</button>
-    </form>
-</div>
-
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Select file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            
+            <label for="deleteTime">Select deletion time:</label>
+            <select name="deleteTime" id="deleteTime">
+                <option value="60">1 Min</option>
+                <option value="3600">1 hour</option>
+                <option value="86400">1 day</option>
+                <option value="604800">1 week</option>
+            </select>
+            
+            <label for="fromEmail">Sender Email:</label>
+            <input type="email" name="fromEmail" id="fromEmail" required> <!-- Added "From" email input field -->
+            
+            <label for="toEmail">Recipient's Email:</label>
+            <input type="email" name="toEmail" id="toEmail" required> <!-- Added "To" email input field -->
+            
+            <input type="submit" value="Share" name="submit">
+        </form>
+    </div>
 </body>
 </html>
