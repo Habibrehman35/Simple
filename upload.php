@@ -13,13 +13,6 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-
-
-// Close the database connection
-$connection->close();
-?>
-
-<?php
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     // Set your email address as the "From" address
@@ -60,28 +53,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             // File upload success
             $successMessage = "The file <strong>" . htmlspecialchars($originalFileName). "</strong> has been uploaded with a unique name: <strong>" . $uniqueFileName . "</strong>";
 
-             // Get the selected deletion time from the form
-        $deleteAfterSeconds = $_POST['deleteTime'];
+            // Get the selected deletion time from the form
+            $deleteAfterSeconds = $_POST['deleteTime'];
 
-        // Calculate expiration time
-        $fileExpirationTime = time() + $deleteAfterSeconds;
+            // Calculate expiration time
+            $fileExpirationTime = time() + $deleteAfterSeconds;
 
-         // Get the selected deletion time in seconds
-         $deleteTime = $_POST['deleteTime'];
-        
-         // Calculate the deletion timestamp
-         $deleteTimestamp = time() + $deleteTime;
+            // Calculate the deletion timestamp
+            $deleteTimestamp = time() + $_POST['deleteTime'];
 
-        // Save expiration time in a file
-        $expirationFile = $targetDir . $uniqueFileName . '.expiration';
-        file_put_contents($expirationFile, $deleteTimestamp);
+            // Save expiration time in a file
+            $expirationFile = $targetDir . $uniqueFileName . '.expiration';
+            file_put_contents($expirationFile, $deleteTimestamp);
+
             // File URL
             $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] . ":80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
 
-
             // Send email notification
             $subject = "File Share Notification";
-            $message = "Hello,\r\n\r\nA file has been shared. Here is the download link:\r\n$fileUrl\r\n\r\nRegards,\r\nBHP File Server";
+            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n. \r\n\r\n";
+
+            // Append the selected deletion time to the message
+            $deleteTime = $_POST['deleteTime'];
+            switch ($deleteTime) {
+                case 60:
+                    $message .= "Please note that this link will expire in 1 minute. Take action promptly to access the content.";
+                    break;
+                case 3600:
+                    $message .= "This link will expire in 1 hour.";
+                    break;
+                case 86400:
+                    $message .= "Please note that this link will expire in 1 Day. Take action promptly to access the content.";
+                    break;
+                case 259200:
+                    $message .= "Please note that this link will expire in 3 Days. Take action promptly to access the content.";
+                    break;
+                case 604800:
+                    $message .= "Please note that this link will expire in 7 Days. Take action promptly to access the content.";
+                    break;
+                case 2592000:
+                    $message .= "This link will expire in 1 month.";
+                    break;
+                default:
+                    $message .= "This link will expire after $deleteTime seconds.";
+                    break;
+            }
 
             // Additional headers
             $headers = "From: $fromEmail" . "\r\n" .
@@ -89,20 +105,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                        "X-Mailer: PHP/" . phpversion();
 
             // Send email
-            mail($toEmail, $subject, $message, $headers);
-
-            // Display success message
-            echo "<p class='success'>$successMessage</p>";
-            echo "<div class='container'>";
-            echo "<p>Here is your file URL: <a href='$fileUrl'>$fileUrl</a></p>";
-            echo "<button onclick='copyFileUrl()' class='copy-button'>Copy URL</button>";
-            echo "</div>";
+            if (mail($toEmail, $subject, $message, $headers)) {
+                // Display success message
+                echo "<p class='success'>$successMessage</p>";
+                echo "<div class='container'>";
+                echo "<p>Here is your file URL: <a href='$fileUrl'>$fileUrl</a></p>";
+                echo "<button onclick='copyFileUrl()' class='copy-button'>Copy URL</button>";
+                echo "</div>";
+            } else {
+                echo "<p class='error'>Error occurred while sending email. Please try again later.</p>";
+            }
         } else {
             // File upload error
             echo "<p class='error'>Sorry, there was an error uploading your file.</p>";
         }
     }
-} 
+}
+
 
 // Check for expiration and delete expired files
 $files = glob($targetDir . '*.expiration');
@@ -115,7 +134,12 @@ foreach ($files as $expirationFile) {
         unlink($expirationFile);
     }
 }
+// Close the database connection
+$connection->close();
 ?>
+
+
+
 
 
 <!-- CSS Styles -->
