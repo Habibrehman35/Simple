@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
             // Send email notification
             $subject = "File Share Notification";
-            $message = "Hello,\r\n\r\nA file has been shared. Here is the download link:\r\n$fileUrl\r\n\r\nRegards,\r\nBHP File Server";
+            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n. \r\n\r\nPlease note that this link will expire in $deleteTime.\r\n\r\n\r\nThank you.\r\n\r\nRegards,\r\nBHP File Share";
 
             // Additional headers
             $headers = "From: $fromEmail" . "\r\n" .
