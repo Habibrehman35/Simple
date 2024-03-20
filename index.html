@@ -18,18 +18,19 @@
             
             <label for="deleteTime">Select deletion time:</label>
             <select name="deleteTime" id="deleteTime">
-                <option value="60">1 Min</option>
+              
                 <option value="3600">1 hour</option>
                 <option value="86400">1 day</option>
-                <option value="604800">1 week</option>
-                <option value="2592000">1 month</option>
+                <option value="259200">3 days</option>
+                <option value="604800">7 days</option>
+           
             </select>
             <br><br>
             <label for="fromEmail">Sender Email:</label>
             <input type="email" name="fromEmail" id="fromEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
             <br><br>
             <label for="toEmail">Recipient's Email:</label>
-            <input type="email" name="toEmail" id="toEmail" required placeholder="@barretthodgson.com">
+            <input type="email" name="toEmail" id="toEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
             
             <button type="submit" name="submit">Upload File</button>
         </form>
