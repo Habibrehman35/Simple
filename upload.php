@@ -67,11 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             file_put_contents($expirationFile, $deleteTimestamp);
 
             // File URL
-            $fileUrl = "http://" . $_SERVER['SERVER_ADDR'] . ":80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
-
+            $fileUrl = "https://"."172.16.40.45:80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
             // Send email notification
             $subject = "File Share Notification";
-            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n. \r\n\r\n";
+            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n \r\n\r\n";
 
             // Append the selected deletion time to the message
             $deleteTime = $_POST['deleteTime'];
