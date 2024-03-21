@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('abc.gif');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding-top: 150px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .accept-btn {
+            background-color: #28a745; /* Green color */
+            color: #fff;
+        }
+
+        .back-btn {
+            background-color: #dc3545; /* Red color */
+            color: #fff;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Disclaimer</h1>
+        <p>
+            This website is provided as a service to the public. The information provided is for general informational purposes only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information.
+        </p>
+        <p>
+            Your use of this website constitutes acceptance of the terms of this disclaimer.
+        </p>
+        <a href="#" class="btn accept-btn" onclick="acceptDisclaimer()">Accept</a>
+        <a href="#" class="btn back-btn" onclick="goBack()">Back</a>
+    </div>
+
+    <script>
+        function acceptDisclaimer() {
+            // Here, you can perform actions when the user accepts the disclaimer
+            alert("You have accepted the disclaimer.");
+            // Redirect to another page or perform other actions as needed
+        }
+
+        function goBack() {
+            // Here, you can perform actions when the user chooses to go back
+            alert("You have chosen to go back.");
+            // Redirect to another page or perform other actions as needed
+        }
+    </script>
+</body>
+</html>
