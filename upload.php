@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $message .= "Please note that this link will expire in 1 minute. Take action promptly to access the content.";
                     break;
                 case 3600:
-                    $message .= "This link will expire in 1 hour.";
+                    $message .= "Please note that this link will expire in 1 Hour. Take action promptly to access the content.";
                     break;
                 case 86400:
                     $message .= "Please note that this link will expire in 1 Day. Take action promptly to access the content.";
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $message .= "Please note that this link will expire in 7 Days. Take action promptly to access the content.";
                     break;
                 case 2592000:
-                    $message .= "This link will expire in 1 month.";
+                    $message .= "Please note that this link will expire in 30 Days. Take action promptly to access the content.";
                     break;
                 default:
                     $message .= "This link will expire after $deleteTime seconds.";
