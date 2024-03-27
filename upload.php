@@ -1,17 +1,7 @@
 <?php
 // Include your database connection configuration or establish connection here
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "file_uploads";
 
-// Create connection
-$connection = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
@@ -67,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             file_put_contents($expirationFile, $deleteTimestamp);
 
             // File URL
-            $fileUrl = "http://172.16.40.68:8088" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+            $fileUrl = "http://172.16.40.68:8088/siimple/" . "$targetDir" . $uniqueFileName;
 
             // Send email notification
             $subject = "File Share Notification";
