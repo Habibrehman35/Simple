@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             file_put_contents($expirationFile, $deleteTimestamp);
 
             // File URL
-            $fileUrl = "http://"."172.16.40.68:8088" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+            $fileUrl = "http://172.16.40.68:8088" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
 
             // Send email notification
             $subject = "File Share Notification";
