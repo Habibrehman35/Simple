@@ -1,17 +1,7 @@
 <?php
 // Include your database connection configuration or establish connection here
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "file_uploads";
 
-// Create connection
-$connection = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
@@ -67,10 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             file_put_contents($expirationFile, $deleteTimestamp);
 
             // File URL
-            $fileUrl = "https://"."172.16.40.45:80" . dirname($_SERVER['PHP_SELF']) . "/$targetDir" . $uniqueFileName;
+            $fileUrl = "http://172.16.40.68:8088/siimple/" . "$targetDir" . $uniqueFileName;
+
             // Send email notification
             $subject = "File Share Notification";
-            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n \r\n\r\n";
+            $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n. \r\n\r\n";
 
             // Append the selected deletion time to the message
             $deleteTime = $_POST['deleteTime'];
@@ -133,8 +124,7 @@ foreach ($files as $expirationFile) {
         unlink($expirationFile);
     }
 }
-// Close the database connection
-$connection->close();
+
 ?>
 
 
