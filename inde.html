@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Sharing</title>
+<style>
+  /* CSS for full-screen video */
+  #video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+
+    z-index: -1; /* Ensure the video is behind other content */
+  }
+
+  /* CSS for the container holding the button */
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  /* CSS for the button */
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  h1{
+    color:#df0c0c;
+  }
+</style>
+</head>
+<body>
+
+<!-- Video background -->
+<video autoplay muted loop id="video-background">
+  <source src="abcd.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Container for button -->
+<div class="container">
+  <h1>Welcome to File Sharing</h1>
+  <button onclick="redirectToUrl()">Share Files</button>
+</div>
+
+<script>
+function redirectToUrl() {
+    // Specify the URL to redirect to
+    var url = 'http://172.16.40.68:8088/siimple/';
+    
+    // Redirect to the specified URL
+    window.location.href = url;
+}
+</script>
+
+</body>
+</html>

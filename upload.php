@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $toEmail = $_POST['toEmail'];
 
     // File upload handling
-    $targetDir = "http://172.16.40.68:8088/siimple/uploads/";
+    $targetDir = "uploads/";
     $originalFileName = $_FILES["fileToUpload"]["name"];
     $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
     $uniqueFileName = uniqid() . '_' . mt_rand(1000, 9999) . '.' . $extension; // Generating a unique file name
@@ -124,8 +124,7 @@ foreach ($files as $expirationFile) {
         unlink($expirationFile);
     }
 }
-// Close the database connection
-$connection->close();
+
 ?>
 
 

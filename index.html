@@ -106,29 +106,50 @@
 </head>
 <body>
     <div class="container">
-        <h3>انسان کے لئے وہی کچھ ہے جس کے لئے وہ کوشش کرے۔ (القرآن)</h3>
+        <h3> انسان کے لئے وہی کچھ ہے جس کے لئے وہ کوشش کرے۔ القرآن</h3>
         <h1>BHP FILE SHARE</h1>
         
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return validateEmails()">
             <label for="fileToUpload">Select file to upload:</label>
             <input type="file" name="fileToUpload" id="fileToUpload">
             
             <label for="deleteTime">Select deletion time:</label>
             <select name="deleteTime" id="deleteTime">
-                <option value="60">1 Min</option>
-                <option value="3600">1 hour</option>
-                <option value="86400">1 day</option>
-                <option value="604800">1 week</option>
+                <option value="3600">1 Hour</option>
+                <option value="86400">1 Day</option>
+                <option value="259200">3 Days</option>
+                <option value="604800">7 Days</option>
             </select>
             
             <label for="fromEmail">Sender Email:</label>
-            <input type="email" name="fromEmail" id="fromEmail" required> <!-- Added "From" email input field -->
+            <input type="email" name="fromEmail" id="fromEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
             
             <label for="toEmail">Recipient's Email:</label>
-            <input type="email" name="toEmail" id="toEmail" required> <!-- Added "To" email input field -->
+            <input type="email" name="toEmail" id="toEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
             
             <input type="submit" value="Share" name="submit">
         </form>
     </div>
+    <script>
+        function validateEmails() {
+            var fromEmail = document.getElementById("fromEmail").value;
+            var toEmail = document.getElementById("toEmail").value;
+            
+            // Regular expression for validating email addresses from barretthodgson.com domain
+            var domainPattern = /@barretthodgson\.com$/;
+            
+            if (!domainPattern.test(fromEmail)) {
+                alert("Please enter a valid sender email address from barretthodgson.com domain.");
+                return false;
+            }
+        
+            if (!domainPattern.test(toEmail)) {
+                alert("Please enter a valid recipient email address from barretthodgson.com domain.");
+                return false;
+            }
+        
+            return true;
+        }
+    </script>
 </body>
 </html>
