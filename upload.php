@@ -124,8 +124,7 @@ foreach ($files as $expirationFile) {
         unlink($expirationFile);
     }
 }
-// Close the database connection
-$connection->close();
+
 ?>
 
 
