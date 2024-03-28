@@ -73,7 +73,7 @@
             font-weight: bold;
         }
 
-        input[type="file"], input[type="email"], select {
+        input[type="file"], input[type="email"], input[type="text"], select {
             margin-bottom: 20px;
             padding: 8px;
             border: 2px solid #054713; /* Red border */
@@ -83,7 +83,23 @@
             font-size: 15px;
         }
 
-        input[type="file"]:focus, input[type="email"]:focus, select:focus {
+        textarea[type="email"],select {
+            margin-bottom: 20px;
+            padding: 8px;
+            border: 2px solid #054713; /* Red border */
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        input[type="file"]:focus, input[type="email"]:focus, input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #ff6666; /* Lighter red on focus */
+        }
+
+
+        textarea[type="email"]:focus, select:focus {
             outline: none;
             border-color: #ff6666; /* Lighter red on focus */
         }
@@ -121,20 +137,25 @@
                 <option value="604800">7 Days</option>
             </select>
             
+            <label for="subject">File Title:</label>
+            <input type="text" name="subject" id="subject" placeholder="Enter Your File Title here">
+            
             <label for="fromEmail">Sender Email:</label>
             <input type="email" name="fromEmail" id="fromEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
             
             <label for="toEmail">Recipient's Email:</label>
-            <input type="email" name="toEmail" id="toEmail" required value="@barretthodgson.com" placeholder="@barretthodgson.com">
-            
+            <textarea type="email" name="toEmail" id="toEmail" rows="4" required placeholder="Enter recipient's email addresses each seperated by a comma, @barretthodgson.com"></textarea>
+          
             <input type="submit" value="Share" name="submit">
+            
         </form>
     </div>
     <script>
         function validateEmails() {
             var fromEmail = document.getElementById("fromEmail").value;
-            var toEmail = document.getElementById("toEmail").value;
-            
+          
+            var subject = document.getElementById("subject").value;
+
             // Regular expression for validating email addresses from barretthodgson.com domain
             var domainPattern = /@barretthodgson\.com$/;
             
@@ -143,11 +164,7 @@
                 return false;
             }
         
-            if (!domainPattern.test(toEmail)) {
-                alert("Please enter a valid recipient email address from barretthodgson.com domain.");
-                return false;
-            }
-        
+       
             return true;
         }
     </script>

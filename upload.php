@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             $fileUrl = "http://172.16.40.68:8088/siimple/" . "$targetDir" . $uniqueFileName;
 
             // Send email notification
-            $subject = "File Share Notification";
+            $subject = $_POST['subject'];
             $message = "Hi,\r\n\r\nI have shared a file with you. \r\n\r\nPlease find below the download link for the shared file:\r\n$fileUrl\r\n. \r\n\r\n";
 
             // Append the selected deletion time to the message
